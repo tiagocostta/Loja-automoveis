@@ -1,3 +1,4 @@
+let dados;
 fetch("php/alocacao.php")
     .then(function (response) {
         return response.json();
@@ -7,7 +8,7 @@ fetch("php/alocacao.php")
         console.log(data);
 
         // array das areas disponiveis sem as outras colunas
-        areas = data.map(({ area }) => parseInt(area))
+        let areas = data.map(({ area }) => parseInt(area))
 
         // Variavel responsavel por armazenar o codigo html
         let codHtml = ""
@@ -25,6 +26,7 @@ fetch("php/alocacao.php")
 
         // Local que é responsavel por substituir no html
         document.getElementById("principal").innerHTML = codHtml
+        dados = data
     })
     .catch(function (error) {
         alert(error);
@@ -37,4 +39,5 @@ function aviso() {
 function area(local) {
     window.location.href = "autos.html";
     localStorage.setItem("titulo", "Area " + local);
+    localStorage.setItem("area", local);
 }
