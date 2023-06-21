@@ -1,7 +1,7 @@
 let titulo = localStorage.getItem("titulo")
 document.getElementById("titulo").innerHTML = titulo
 let num_veiculos = []
-let nomes_veiculos = []
+let id_veiculos = []
 let veiculos = []
 let area = localStorage.getItem("area")
 
@@ -10,9 +10,10 @@ fetch("php/alocacao.php")
         return response.json()
     })
     .then(function (data) {
+        console.log(data)
         for (let i = 0; i < data.length; i++) {
-            if (data[i].area == area) {
-                num_veiculos.push(parseInt(data[i].automovel))
+            if (data[i].area == area && data[i].quantidade != 0) {
+                num_veiculos.push(parseInt(data[i].automovel))  
             }
         }
     })
@@ -31,7 +32,7 @@ fetch("php/automoveis.php")
                 if (num_veiculos[i] == data[j].id) {
                     console.log(`${num_veiculos[i]} -- ${data[j].id}`)
                     veiculos.push(`${data[j].modelo} | ${data[j].preco}`)
-                    nomes_veiculos.push(data[j].modelo)
+                    id_veiculos.push(data[j].id)
                 }
             }
         }
@@ -39,7 +40,7 @@ fetch("php/automoveis.php")
 
         for (let i = 0; i < veiculos.length; i++) {
             codHtml += `<label class="auto-modelo">${veiculos[i]}</label>` +
-                `<button class="autos-btn" onclick="direcionamento('${nomes_veiculos[i]}')">Vender</button>` +
+                `<button class="autos-btn" onclick="direcionamento('${id_veiculos[i]}')">Vender</button>` +
                 "<br><br>"
         }
 
@@ -48,5 +49,5 @@ fetch("php/automoveis.php")
 
 function direcionamento(veiculo) {
     window.location.href = "vendas.html"
-    localStorage.setItem("nome_veiculo", veiculo)
+    localStorage.setItem("id_veiculo", veiculo)
 }

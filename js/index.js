@@ -1,4 +1,3 @@
-let dados;
 fetch("php/alocacao.php")
     .then(function (response) {
         return response.json();
@@ -7,7 +6,7 @@ fetch("php/alocacao.php")
         // Manipula os dados recebidos do PHP
         console.log(data);
 
-        // array das areas disponiveis sem as outras colunas
+        // array das v  areas disponiveis sem as outras colunas
         let areas = data.map(({ area }) => parseInt(area))
 
         // Variavel responsavel por armazenar o codigo html
@@ -15,18 +14,17 @@ fetch("php/alocacao.php")
 
         // Estrutura para a verificação de area de 1 a 6
         for (let i = 1; i <= 6; i++) {
-            
+
             // Condição para verificar se o numero existe dentro do array
             if (areas.includes(i)) {
-                codHtml += `<div class="area${i} border" onclick="area(${i})" style="background-color: blue; color: white;">${i}</div>`
+                codHtml += `<div class="area${i} border" onclick="area(${i})" style="background-color: #0000FF; color: #FFFFFF;">${i}</div>`
             } else {
-                codHtml += `<div class="area${i} border" onclick="aviso()" style="background-color: white">${i}</div>`
+                codHtml += `<div class="area${i} border" onclick="aviso()" style="background-color: #FFFFFF">${i}</div>`
             }
         }
 
         // Local que é responsavel por substituir no html
         document.getElementById("principal").innerHTML = codHtml
-        dados = data
     })
     .catch(function (error) {
         alert(error);
