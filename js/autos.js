@@ -1,53 +1,52 @@
-let titulo = localStorage.getItem("titulo")
-document.getElementById("titulo").innerHTML = titulo
-let num_veiculos = []
-let id_veiculos = []
-let veiculos = []
-let area = localStorage.getItem("area")
+let titulo = localStorage.getItem("titulo"); // Obtém o valor do item "titulo" armazenado no localStorage
+document.getElementById("titulo").innerHTML = titulo; // Define o conteúdo do elemento com o ID "titulo" como o valor obtido
 
+let num_veiculos = []; // Array para armazenar os números de veículos
+let nome_veiculo = []; // Array para armazenar os nomes dos veículos
+let veiculos = []; // Array para armazenar informações dos veículos
+let area = localStorage.getItem("area"); // Obtém o valor do item "area" armazenado no localStorage
+
+// Faz uma requisição fetch para "php/alocacao.php"
 fetch("php/alocacao.php")
     .then(function (response) {
-        return response.json()
+        return response.json(); // Converte a resposta para JSON
     })
     .then(function (data) {
-        console.log(data)
         for (let i = 0; i < data.length; i++) {
             if (data[i].area == area && data[i].quantidade != 0) {
-                num_veiculos.push(parseInt(data[i].automovel))  
+                num_veiculos.push(parseInt(data[i].automovel)); // Adiciona o número do veículo ao array "num_veiculos"
             }
         }
-    })
+    });
 
+// Faz uma requisição fetch para "php/automoveis.php"
 fetch("php/automoveis.php")
     .then(function (response) {
-        return response.json()
+        return response.json(); // Converte a resposta para JSON
     })
     .then(function (data) {
-        console.log(data);
         let codHtml = "";
-        console.log(num_veiculos)
 
         for (let i = 0; i < num_veiculos.length; i++) {
             for (let j = 0; j < data.length; j++) {
                 if (num_veiculos[i] == data[j].id) {
-                    console.log(`${num_veiculos[i]} -- ${data[j].id}`)
-                    veiculos.push(`${data[j].modelo} | ${data[j].preco}`)
-                    id_veiculos.push(data[j].id)
+                    veiculos.push(`${data[j].modelo} | ${data[j].preco}`); // Adiciona as informações do veículo ao array "veiculos"
+                    nome_veiculo.push(data[j].modelo); // Adiciona o nome do veículo ao array "nome_veiculo"
                 }
             }
         }
-        console.log(veiculos)
 
         for (let i = 0; i < veiculos.length; i++) {
             codHtml += `<label class="auto-modelo">${veiculos[i]}</label>` +
-                `<button class="autos-btn" onclick="direcionamento('${id_veiculos[i]}')">Vender</button>` +
-                "<br><br>"
+                `<button class="autos-btn" onclick="direcionamento(${num_veiculos[i]} ,  '${nome_veiculo[i]}')">Vender</button>` +
+                "<br><br>"; // Cria o HTML para exibir as informações dos veículos e botões de venda
         }
 
-        document.getElementById("autos-label").innerHTML = codHtml
-    })
+        document.getElementById("autos-label").innerHTML = codHtml; // Define o conteúdo do elemento com o ID "autos-label" como o HTML gerado
+    });
 
-function direcionamento(veiculo) {
-    window.location.href = "vendas.html"
-    localStorage.setItem("id_veiculo", veiculo)
+function direcionamento(id, veiculo) {
+    window.location.href = "vendas.html"; // Redireciona para a página "vendas.html"
+    localStorage.setItem("id_veiculo", id); // Armazena o ID do veículo no localStorage
+    localStorage.setItem("nome_veiculo", veiculo); // Armazena o nome do veículo no localStorage
 }

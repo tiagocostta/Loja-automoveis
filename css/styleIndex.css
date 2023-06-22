@@ -1,67 +1,86 @@
-body{
-    font-family: 'Segoe UI';
+/* Estilos aplicados ao body */
+body {
+    font-family: 'Segoe UI'; /* Define a fonte 'Segoe UI' para o texto no body */
 }
-h1{
-    text-align: center;
+
+/* Estilos aplicados a todos os elementos h1 */
+h1 {
+    text-align: center; /* Centraliza o texto dentro dos elementos h1 */
 }
-#principal{
-    width: 60%;
-    margin-inline: auto;
+
+/* Estilos aplicados a um elemento com o ID "principal" */
+#principal {
+    width: 60%; /* Define a largura como 60% do contêiner pai */
+    margin-inline: auto; /* Centraliza horizontalmente o elemento usando margens automáticas */
 }
-.border{
-    border: 1px solid black;
+
+/* Estilos aplicados a elementos com a classe "border" */
+.border {
+    border: 1px solid #000000; /* Define uma borda sólida preta com 1 pixel de espessura */
 }
-.area1{ 
-    width: 100px;
-    height: 100px;
-    margin-top: 10px;
-    margin-left: 10px;
-    text-align: center;
-    font-size: 20px;
-    font-style: bold;
+
+/* Estilos aplicados a elementos com a classe "area1" */
+.area1 {
+    width: 100px; /* Define a largura como 100 pixels */
+    height: 100px; /* Define a altura como 100 pixels */
+    margin-top: 10px; /* Define uma margem superior de 10 pixels */
+    margin-left: 10px; /* Define uma margem esquerda de 10 pixels */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    font-size: 20px; /* Define o tamanho da fonte como 20 pixels */
+    font-style: bold; /* Define o estilo da fonte como negrito */
 }
-.area2{
-    width: 50px;
-    height: 80px;
-    margin-top: -80px;
-    margin-left: 150px;
-    text-align: center;
-    font-size: 20px;
-    font-style: bold;
+
+/* Estilos aplicados a elementos com a classe "area2" */
+.area2 {
+    width: 50px; /* Define a largura como 50 pixels */
+    height: 80px; /* Define a altura como 80 pixels */
+    margin-top: -80px; /* Desloca o elemento 80 pixels acima */
+    margin-left: 150px; /* Desloca o elemento 150 pixels para a direita */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    font-size: 20px; /* Define o tamanho da fonte como 20 pixels */
+    font-style: bold; /* Define o estilo da fonte como negrito */
 }
-.area3{
-    width: 350px;
-    height: 100px;
-    margin-top: -100px;
-    margin-left: 250px;
-    text-align: center;
-    font-size: 20px;
-    font-style: bold;
+
+/* Estilos aplicados a elementos com a classe "area3" */
+.area3 {
+    width: 350px; /* Define a largura como 350 pixels */
+    height: 100px; /* Define a altura como 100 pixels */
+    margin-top: -100px; /* Desloca o elemento 100 pixels acima */
+    margin-left: 250px; /* Desloca o elemento 250 pixels para a direita */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    font-size: 20px; /* Define o tamanho da fonte como 20 pixels */
+    font-style: bold; /* Define o estilo da fonte como negrito */
 }
-.area4{
-    width: 200px;
-    height: 300px;
-    margin-top: -102px;
-    margin-left: auto;
-    margin-right: 10px;
-    text-align: center;
-    font-size: 20px;
-    font-style: bold;
+
+/* Estilos aplicados a elementos com a classe "area4" */
+.area4 {
+    width: 200px; /* Define a largura como 200 pixels */
+    height: 300px; /* Define a altura como 300 pixels */
+    margin-top: -102px; /* Desloca o elemento 102 pixels acima */
+    margin-left: auto; /* Centraliza horizontalmente o elemento usando margens automáticas */
+    margin-right: 10px; /* Define uma margem direita de 10 pixels */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    font-size: 20px; /* Define o tamanho da fonte como 20 pixels */
+    font-style: bold; /* Define o estilo da fonte como negrito */
 }
-.area5{
-    width: 100px;
-    height: 150px;
-    margin-top: -100px;
-    text-align: center;
-    font-size: 20px;
-    font-style: bold;
+
+/* Estilos aplicados a elementos com a classe "area5" */
+.area5 {
+    width: 100px; /* Define a largura como 100 pixels */
+    height: 150px; /* Define a altura como 150 pixels */
+    margin-top: -100px; /* Desloca o elemento 100 pixels acima */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    font-size: 20px; /* Define o tamanho da fonte como 20 pixels */
+    font-style: bold; /* Define o estilo da fonte como negrito */
 }
-.area6{
-    border: 1px solid black;
-    width: 300px;
-    height: 150px;
-    margin-inline: auto;
-    text-align: center;
-    font-size: 20px;
-    font-style: bold;
+
+/* Estilos aplicados a elementos com a classe "area6" */
+.area6 {
+    border: 1px solid #000000; /* Define uma borda sólida preta com 1 pixel de espessura */
+    width: 300px; /* Define a largura como 300 pixels */
+    height: 150px; /* Define a altura como 150 pixels */
+    margin-inline: auto; /* Centraliza horizontalmente o elemento usando margens automáticas */
+    text-align: center; /* Centraliza o texto dentro do elemento */
+    font-size: 20px; /* Define o tamanho da fonte como 20 pixels */
+    font-style: bold; /* Define o estilo da fonte como negrito */
 }

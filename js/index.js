@@ -1,41 +1,42 @@
+// Realiza uma requisição para o arquivo "php/alocacao.php" e manipula os dados recebidos
 fetch("php/alocacao.php")
     .then(function (response) {
-        return response.json();
+        return response.json(); // Converte a resposta em formato JSON
     })
     .then(function (data) {
-        // Manipula os dados recebidos do PHP
-        console.log(data);
+        console.log(data); // Imprime os dados no console
 
-        // array das v  areas disponiveis sem as outras colunas
-        let areas = data.map(({ area }) => parseInt(area))
+        let areas = data.map(({ area }) => parseInt(area)); // Extrai a área de cada objeto e converte para um número inteiro
 
-        // Variavel responsavel por armazenar o codigo html
-        let codHtml = ""
+        let codHtml = ""; // Variável para armazenar o código HTML gerado
 
-        // Estrutura para a verificação de area de 1 a 6
+        // Loop para gerar o código HTML com base nos dados recebidos
         for (let i = 1; i <= 6; i++) {
-
-            // Condição para verificar se o numero existe dentro do array
             if (areas.includes(i)) {
-                codHtml += `<div class="area${i} border" onclick="area(${i})" style="background-color: #0000FF; color: #FFFFFF;">${i}</div>`
+                // Se a área estiver disponível, gera uma div com estilo e função de clique específicos
+                codHtml += `<div class="area${i} border" onclick="area(${i})" style="background-color: #0000FF; color: #FFFFFF;">${i}</div>`;
             } else {
-                codHtml += `<div class="area${i} border" onclick="aviso()" style="background-color: #FFFFFF">${i}</div>`
+                // Se a área não estiver disponível, gera uma div com estilo e função de clique específicos
+                codHtml += `<div class="area${i} border" onclick="aviso()" style="background-color: #FFFFFF">${i}</div>`;
             }
         }
 
-        // Local que é responsavel por substituir no html
-        document.getElementById("principal").innerHTML = codHtml
+        // Insere o código HTML gerado no elemento com o ID "principal"
+        document.getElementById("principal").innerHTML = codHtml;
     })
     .catch(function (error) {
+        // Exibe um alerta em caso de erro na requisição
         alert(error);
     });
 
+// Função que exibe um alerta indicando que a área está indisponível para compra
 function aviso() {
-    alert("Area indisponivel para compra");
+    alert("Área indisponível para compra");
 }
 
+// Função que redireciona o usuário para a página "autos.html" e armazena dados no objeto localStorage
 function area(local) {
-    window.location.href = "autos.html";
-    localStorage.setItem("titulo", "Area " + local);
-    localStorage.setItem("area", local);
+    window.location.href = "autos.html"; // Redireciona para a página "autos.html"
+    localStorage.setItem("titulo", "Área " + local); // Armazena o título da área no objeto localStorage
+    localStorage.setItem("area", local); // Armazena o número da área no objeto localStorage
 }
