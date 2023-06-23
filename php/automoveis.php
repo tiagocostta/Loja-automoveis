@@ -1,38 +1,41 @@
 <?php
-// Configuração do banco de dados
+// Informações de conexão com o banco de dados
 $host = "localhost";
 $username = "root";
 $password = "";
 $database = "db_conce";
 
-// Cria uma conexão com o banco de dados
+// Conexão com o banco de dados
 $conn = new mysqli($host, $username, $password, $database);
 
-// Verifica se ocorreu algum erro na conexão
+// Verificar se houve erro na conexão
 if ($conn->connect_error) {
     die("Erro ao conectar ao banco de dados: " . $conn->connect_error);
 }
 
-// Consulta SQL para obter os dados do banco de dados
+// Consulta SQL para selecionar todos os registros da tabela "automoveis"
 $sql = "SELECT * FROM automoveis";
 $result = $conn->query($sql);
 
-// Verifica se a consulta retornou resultados
+// Verificar se há resultados retornados pela consulta
 if ($result->num_rows > 0) {
     // Array para armazenar os resultados da consulta
     $data = array();
 
-    // Itera sobre os resultados e adiciona-os ao array
+    // Iterar sobre os resultados e armazená-los em um array
     while ($row = $result->fetch_assoc()) {
         $data[] = $row;
     }
 
-    // Codifica os dados como JSON e envia para JavaScript
-    echo json_encode($data);
+    // Converter o array em formato JSON
+    $json_data = json_encode($data);
+
+    // Imprimir os dados no formato JSON
+    echo $json_data;
 } else {
     echo "Nenhum resultado encontrado.";
 }
 
-// Fecha a conexão com o banco de dados
+// Fechar a conexão com o banco de dados
 $conn->close();
 ?>

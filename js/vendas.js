@@ -1,72 +1,73 @@
+// Obter o título do veículo armazenado no localStorage
 let titulo = localStorage.getItem("nome_veiculo");
+document.getElementById("vendas-h1").innerHTML = titulo;
 
-        document.getElementById("vendas-h1").innerHTML = titulo;
+// Obter o ID do veículo armazenado no localStorage
+let id_veiculo = localStorage.getItem("id_veiculo");
+let concessionaria = "";
 
-        let id_veiculo = localStorage.getItem("id_veiculo")
+// Requisição para obter dados dos clientes
+fetch("php/clientes.php")
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        // Construir as opções de seleção para os clientes
+        let codHtml = '<Label class="vendas-espaco">Cliente:</Label>' +
+            '<select>' +
+            '<option disabled selected></option>';
 
-        let conce = ""
+        for (let i = 0; i < data.length; i++) {
+            codHtml += `<option>${data[i].nome}</option>`;
+        }
+        codHtml += '</select><br><br>';
 
-        fetch("php/clientes.php")
-        .then(function(response) {
-            return response.json()
-        })
-        .then(function(data){
-            console.log(data)
+        // Preencher o elemento HTML com as opções de seleção dos clientes
+        document.getElementById("vendas-clientes").innerHTML = codHtml;
+    })
+    .catch(function(error) {
+        console.log("Erro ao obter dados dos clientes:", error);
+    });
 
-            let codHtml = '<Label class="vendas-espaco">Cliente:</Label>'+
-            '<select>'+
-            '<option disabled selected></option>'
-
-            for(let i = 0; i < data.length; i++){
-                codHtml += `<option>${data[i].nome}</option>`
+// Requisição para obter dados de alocação
+fetch("php/alocacao.php")
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        // Procurar a alocação correspondente ao ID do veículo
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].automovel == id_veiculo) {
+                concessionaria = data[i].concessionaria;
             }
-            codHtml += '</select><br><br>'
+        }
+    })
+    .catch(function(error) {
+        console.log("Erro ao obter dados de alocação:", error);
+    });
 
-            document.getElementById("vendas-clientes").innerHTML = codHtml
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+// Requisição para obter dados das concessionárias
+fetch("php/concessionarias.php")
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        // Construir as opções de seleção para as concessionárias
+        let codHtml = '<Label>Concessionaria:</Label>' +
+            '<select name="id">' +
+            '<option value="" disabled selected></option>';
 
-        fetch("php/alocacao.php")
-        .then(function(response){
-            return response.json()
-        })
-        .then(function(data){ 
-            
-            console.log(id_veiculo)
-
-            for(let i=0; i<data.length; i++){
-                if(data[i].automovel == id_veiculo){
-                    conce = data[i].concessionaria
-                }
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].id == concessionaria) {
+                console.log(data[i].id);
+                codHtml += `<option value="${id_veiculo}">${data[i].concessionaria}</option>`;
             }
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+        }
+        codHtml += '</select><br><br>';
 
-        fetch("php/concessionarias.php")
-        .then(function(response){
-            return response.json()
-        })
-        .then(function(data){
-            console.log(data)
-
-            let codHtml = '<Label>Concessionaria:</Label>'+
-            '<select name="id">'+
-            '<option value="" disabled selected></option>'
-
-            for(let i = 0; i < data.length; i++){
-                if(data[i].id == conce){
-                    console.log(data[i].id)
-                    codHtml += `<option value="${id_veiculo}">${data[i].concessionaria}</option>`
-                }
-            }
-            codHtml += '</select><br><br>'
-
-            document.getElementById("vendas-conce").innerHTML = codHtml
-        })
-        .catch(function(error){
-            console.log(error);
-        }) 
+        // Preencher o elemento HTML com as opções de seleção das concessionárias
+        document.getElementById("vendas-conce").innerHTML = codHtml;
+    })
+    .catch(function(error) {
+        console.log("Erro ao obter dados das concessionárias:", error);
+    });
